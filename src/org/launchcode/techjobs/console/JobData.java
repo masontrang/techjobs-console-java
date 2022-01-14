@@ -7,9 +7,7 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -20,6 +18,7 @@ public class JobData {
     private static Boolean isDataLoaded = false;
 
     private static ArrayList<HashMap<String, String>> allJobs;
+    private static ArrayList<HashMap<String, String>> allJobsLowerCase;
 
     /**
      * Fetch list of all values from loaded data,
@@ -74,9 +73,9 @@ public class JobData {
 
         for (HashMap<String, String> row : allJobs) {
 
-            String aValue = row.get(column);
+            String aValue = row.get(column).toLowerCase();
 
-            if (aValue.contains(value)) {
+            if (aValue.contains(value.toLowerCase())) {
                 jobs.add(row);
             }
         }
@@ -104,6 +103,7 @@ public class JobData {
             String[] headers = parser.getHeaderMap().keySet().toArray(new String[numberOfColumns]);
 
             allJobs = new ArrayList<>();
+            allJobsLowerCase = new ArrayList<>();
 
             // Put the records into a more friendly format
             for (CSVRecord record : records) {
@@ -114,6 +114,7 @@ public class JobData {
                 }
 
                 allJobs.add(newJob);
+                allJobsLowerCase.add(newJob);
             }
 
             // flag the data as loaded, so we don't do it twice
@@ -124,5 +125,32 @@ public class JobData {
             e.printStackTrace();
         }
     }
+
+
+    public static ArrayList<HashMap<String, String>> findByValue(String searchField, String searchTerm){
+        loadData();
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+
+
+        for (HashMap<String, String> job : allJobs){
+            Set<String> keys = job.keySet();
+            Iterator<String> keysIterator = keys.iterator();
+            while(keysIterator.hasNext()){
+                String key = keysIterator.next();
+                String aValue = job.get(key).toLowerCase();
+                if (aValue.contains(searchTerm.toLowerCase())) {
+                    jobs.add(job);
+                }
+            }
+
+        }
+
+
+
+        return jobs;
+
+    }
+
+
 
 }
