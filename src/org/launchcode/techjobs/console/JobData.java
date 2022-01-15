@@ -18,7 +18,7 @@ public class JobData {
     private static Boolean isDataLoaded = false;
 
     private static ArrayList<HashMap<String, String>> allJobs;
-    private static ArrayList<HashMap<String, String>> allJobsLowerCase;
+//    private static ArrayList<HashMap<String, String>> allJobsLowerCase;
 
     /**
      * Fetch list of all values from loaded data,
@@ -103,7 +103,7 @@ public class JobData {
             String[] headers = parser.getHeaderMap().keySet().toArray(new String[numberOfColumns]);
 
             allJobs = new ArrayList<>();
-            allJobsLowerCase = new ArrayList<>();
+//            allJobsLowerCase = new ArrayList<>();
 
             // Put the records into a more friendly format
             for (CSVRecord record : records) {
@@ -114,7 +114,7 @@ public class JobData {
                 }
 
                 allJobs.add(newJob);
-                allJobsLowerCase.add(newJob);
+//                allJobsLowerCase.add(newJob);
             }
 
             // flag the data as loaded, so we don't do it twice
