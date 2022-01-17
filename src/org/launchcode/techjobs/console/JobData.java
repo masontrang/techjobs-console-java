@@ -134,7 +134,8 @@ public class JobData {
 
         for (HashMap<String, String> job : allJobs){
             Set<String> keys = job.keySet();
-            Iterator<String> keysIterator = keys.iterator();
+            Iterator<String> keysIterator;
+            keysIterator = keys.iterator();
             while(keysIterator.hasNext()){
                 String key = keysIterator.next();
                 String aValue = job.get(key).toLowerCase();

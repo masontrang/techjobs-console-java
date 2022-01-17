@@ -118,6 +118,7 @@ public class TechJobs {
         }
         for (int i = 0; i<someJobs.size(); i++){
             System.out.println("*****");
+//            System.out.println("test: " + someJobs.get(i));
             System.out.println("position type: " + someJobs.get(i).get("position type"));
             System.out.println("name: " + someJobs.get(i).get("name"));
             System.out.println("employer: " + someJobs.get(i).get("employer"));
